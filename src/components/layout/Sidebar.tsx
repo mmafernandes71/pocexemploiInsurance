@@ -28,7 +28,7 @@ const NavItem: React.FC<NavItemProps> = ({ icon, label, active = false, onClick,
           onClick={onClick}
           className="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-orange-50 hover:bg-orange-100 transition-colors group"
         >
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <div className="text-orange-600">
               <Bot size={24} strokeWidth={2} />
             </div>
