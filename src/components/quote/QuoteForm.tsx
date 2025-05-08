@@ -62,6 +62,13 @@ export const QuoteForm: React.FC = () => {
     }).format(value);
   };
 
+  const calculateIMC = () => {
+    if (formData.peso && formData.altura) {
+      return (formData.peso / (formData.altura * formData.altura)).toFixed(1);
+    }
+    return '';
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -124,13 +131,18 @@ export const QuoteForm: React.FC = () => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Profissão</label>
-              <input
-                type="text"
+              <select
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 value={formData.profissao}
                 onChange={(e) => updateFormData({ profissao: e.target.value })}
                 required
-              />
+              >
+                <option value="">Selecione</option>
+                <option value="MEDICO">Médico</option>
+                <option value="PROFESSOR">Professor</option>
+                <option value="ADVOGADO">Advogado</option>
+                <option value="MOTOBOY">Motoboy</option>
+              </select>
             </div>
 
             <div>
@@ -159,7 +171,7 @@ export const QuoteForm: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Número de Filhos</label>
               <input
@@ -197,9 +209,19 @@ export const QuoteForm: React.FC = () => {
                 required
               />
             </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">IMC</label>
+              <input
+                type="text"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 bg-gray-50"
+                value={calculateIMC()}
+                readOnly
+              />
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Sexo</label>
               <div className="flex gap-4 border border-gray-300 rounded-lg p-3">
@@ -257,19 +279,6 @@ export const QuoteForm: React.FC = () => {
                 </label>
               </div>
             </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Cobertura Básica</label>
-              <input
-                type="text"
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                value={getCurrencyValue(formData.obrigatorioVlrCobBasica)}
-                onChange={(e) => handleCurrencyChange(e, 'obrigatorioVlrCobBasica')}
-                required
-              />
-            </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Renda</label>
@@ -278,6 +287,19 @@ export const QuoteForm: React.FC = () => {
                 className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 value={getCurrencyValue(formData.renda)}
                 onChange={(e) => handleCurrencyChange(e, 'renda')}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Cobertura Básica</label>
+              <input
+                type="text"
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                value={getCurrencyValue(formData.obrigatorioVlrCobBasica)}
+                onChange={(e) => handleCurrencyChange(e, 'obrigatorioVlrCobBasica')}
                 required
               />
             </div>
